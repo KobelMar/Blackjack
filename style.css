@@ -43,3 +43,6 @@
 #hit-button, #stand-button {
     margin-right: 10px;
 }
+#Player-Span-Score, #Dealer-Span-Score {
+    color: black;
+}
