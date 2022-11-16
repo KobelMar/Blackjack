@@ -21,9 +21,9 @@ document.querySelector('#hit-button').addEventListener('click', hitButton);
 document.querySelector('#stand-button').addEventListener('click', standButton);
 document.querySelector('#deal-button').addEventListener('click', dealButton);
 
-let hitAudio = new Audio('../../Challenge/static/Sounds/Challenge5/sounds/swish.m4a');
-let winAudio = new Audio('../../Challenge/static/Sounds/Challenge5/sounds/cash.mp3');
-let drawAudio = new Audio('../../Challenge/static/Sounds/Challenge5/sounds/aww.mp3');
+let hitAudio = new Audio('./sounds/swish.m4a');
+let winAudio = new Audio('./sounds/cash.mp3');
+let drawAudio = new Audio('./sounds/aww.mp3');
 
 let startGame = true;
 let stand = false;
