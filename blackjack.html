@@ -1,0 +1,50 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blackjack</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+</head>
+
+<body>
+    <div class="container-5">
+        <h2>Challenge 5: Blackjack</h2>
+        <h3 id="result"><span id="ResultMessage">Let's play</span></h3>
+
+        <div class="flexbox-row1" id="flexboxRow1" >
+            <div id="Player-Box">
+                <h2 style="color: whitesmoke;">You: <span id="Player-Span-Score">0</span></h2>
+            </div>
+            <div id="Dealer-Box">
+                <h2 style="color: whitesmoke;">Dealer: <span id="Dealer-Span-Score">0</span></h2>
+            </div>
+        </div>
+
+        <div class="flexbox-row2" >
+            <div id="Buttons">
+                <div><button id="hit-button" class="btn btn-primary btn-lg">Hit</button></div>
+                <div ><button id="stand-button" class="btn btn-warning btn-lg">Stand</button></div>
+                <div ><button id="deal-button" class="btn btn-danger btn-lg">Deal</button></div>
+            </div>
+        </div>
+
+        <div class="flexbox-row3" >
+            <table>
+                <tr>
+                    <th>Wins</th>
+                    <th>Draws</th>
+                    <th>Losses</th>
+                </tr>
+                <tr>
+                    <td><span id="Wins-Table">0</span></td>
+                    <td><span id="Draws-Table">0</span></td>
+                    <td><span id="Loses-Table">0</span></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <script src="main.js"></script>
+</body>
+</html>
