@@ -28,7 +28,6 @@ const cardValue = {
   K: 10,
   A: [1, 11],
 };
-//console.log(cardValue[cardArray[12]]);
 
 let blackjackgame = {
   Player: {
@@ -67,7 +66,9 @@ function hitButton() {
     let card = document.createElement("img");
     card.src = `./images/${cardArray[randomNumber]}.png`;
     card.width = 80;
-    card.style.padding = 5;
+    card.style.border = "1px solid black";
+    card.style.borderRadius = "6px";
+    card.style.marginRight = "1rem";
     document.querySelector("#Player-Box").appendChild(card);
     hitAudio.play();
 
@@ -86,16 +87,27 @@ function sleep(waitTime) {
 
 async function standButton() {
   if (startGame === false && turnOver === false) {
-    while (DEALER.scoreSpan < 17) {
+    while (
+      DEALER.scoreSpan < 17 ||
+      (YOU.scoreSpan >= 17 && DEALER.scoreSpan >= 17)
+    ) {
       let randomNumber = Math.floor(Math.random() * 13);
       let card = document.createElement("img");
       card.src = `./images/${cardArray[randomNumber]}.png`;
       card.width = 80;
-      card.style.padding = 5;
+      card.style.border = "1px solid black";
+      card.style.borderRadius = "6px";
+      card.style.marginRight = "1rem";
       document.querySelector("#Dealer-Box").appendChild(card);
       hitAudio.play();
 
       updateScore(randomNumber, DEALER);
+
+      if (YOU.scoreSpan < DEALER.scoreSpan) {
+        updateResultAndTable();
+        break;
+      }
+
       await sleep(1000);
     }
 
@@ -114,10 +126,10 @@ function dealButton() {
 
     YOU.scoreSpan = 0;
     document.querySelector(YOU["ID-Span-Score"]).innerHTML = YOU.scoreSpan;
-    document.querySelector(YOU["ID-Span-Score"]).style.color = "white";
+    document.querySelector(YOU["ID-Span-Score"]).style.color = "black";
     DEALER.scoreSpan = 0;
     document.querySelector(DEALER["ID-Span-Score"]).innerHTML = YOU.scoreSpan;
-    document.querySelector(DEALER["ID-Span-Score"]).style.color = "white";
+    document.querySelector(DEALER["ID-Span-Score"]).style.color = "black";
 
     let allCards = document
       .getElementById("flexboxRow1")
@@ -193,12 +205,3 @@ function updateResultAndTable() {
   }
   turnOver = true;
 }
-
-function sum(a, b) {
-  return a + b;
-}
-
-let sum2 = (a, b) => a + b;
-
-console.log(sum(1, 2));
-console.log(sum2(3, 2));
