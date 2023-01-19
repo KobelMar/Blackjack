@@ -85,8 +85,6 @@ function sleep(waitTime) {
   return new Promise((resolve) => setTimeout(resolve, waitTime));
 }
 
-
-
 function dealButton() {
   if (turnOver === true) {
     resultMessage.innerHTML = "Lets Play";
@@ -133,14 +131,12 @@ async function standButton() {
         updateResultAndTable();
         return;
       }
-
+      if (DEALER.scoreSpan > 21) {
+        updateResultAndTable();
+        return;
+      }
       await sleep(1000);
     }
-
-    if (DEALER.scoreSpan >= 17) {
-      updateResultAndTable();
-    }
-
     stand = true;
   }
 }
@@ -170,13 +166,8 @@ function updateScore(cardNumber, activePlayer) {
   }
 }
 
-
-
-
 function updateResultAndTable() {
   if (YOU.scoreSpan <= 21) {
-
-      console.log("in: updateResultAndTable you <=21")
     if (YOU.scoreSpan > DEALER.scoreSpan) {
       resultMessage.innerHTML = "You Won";
       resultMessage.style.color = "green";
