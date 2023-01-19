@@ -127,18 +127,13 @@ async function standButton() {
 
       updateScore(randomNumber, DEALER);
 
-      if (YOU.scoreSpan < DEALER.scoreSpan) {
+      if (YOU.scoreSpan < DEALER.scoreSpan || DEALER.scoreSpan > 21) {
         updateResultAndTable();
-        return;
       }
-      if (DEALER.scoreSpan > 21) {
-        updateResultAndTable();
-        return;
-      }
-      await sleep(1000);
     }
-    stand = true;
+    await sleep(1000);
   }
+  stand = true;
 }
 
 function updateScore(cardNumber, activePlayer) {
