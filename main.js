@@ -85,39 +85,7 @@ function sleep(waitTime) {
   return new Promise((resolve) => setTimeout(resolve, waitTime));
 }
 
-async function standButton() {
-  if (startGame === false && turnOver === false) {
-    while (
-      DEALER.scoreSpan < 17 ||
-      (YOU.scoreSpan >= 17 && DEALER.scoreSpan >= 17)
-    ) {
-      let randomNumber = Math.floor(Math.random() * 13);
-      let card = document.createElement("img");
-      card.src = `./images/${cardArray[randomNumber]}.png`;
-      card.width = 80;
-      card.style.border = "1px solid black";
-      card.style.borderRadius = "6px";
-      card.style.marginRight = "1rem";
-      document.querySelector("#Dealer-Box").appendChild(card);
-      hitAudio.play();
 
-      updateScore(randomNumber, DEALER);
-
-      if (YOU.scoreSpan < DEALER.scoreSpan) {
-        updateResultAndTable();
-        break;
-      }
-
-      await sleep(1000);
-    }
-
-    if (DEALER.scoreSpan >= 17) {
-      updateResultAndTable();
-    }
-
-    stand = true;
-  }
-}
 
 function dealButton() {
   if (turnOver === true) {
@@ -140,6 +108,40 @@ function dealButton() {
     startGame = true;
     stand = false;
     turnOver = false;
+  }
+}
+
+async function standButton() {
+  if (startGame === false && turnOver === false) {
+    while (
+      DEALER.scoreSpan < 17 ||
+      (YOU.scoreSpan >= 17 && DEALER.scoreSpan >= 17)
+    ) {
+      let randomNumber = Math.floor(Math.random() * 13);
+      let card = document.createElement("img");
+      card.src = `./images/${cardArray[randomNumber]}.png`;
+      card.width = 80;
+      card.style.border = "1px solid black";
+      card.style.borderRadius = "6px";
+      card.style.marginRight = "1rem";
+      document.querySelector("#Dealer-Box").appendChild(card);
+      hitAudio.play();
+
+      updateScore(randomNumber, DEALER);
+
+      if (YOU.scoreSpan < DEALER.scoreSpan) {
+        updateResultAndTable();
+        return;
+      }
+
+      await sleep(1000);
+    }
+
+    if (DEALER.scoreSpan >= 17) {
+      updateResultAndTable();
+    }
+
+    stand = true;
   }
 }
 
@@ -168,14 +170,20 @@ function updateScore(cardNumber, activePlayer) {
   }
 }
 
+
+
+
 function updateResultAndTable() {
   if (YOU.scoreSpan <= 21) {
+
+      console.log("in: updateResultAndTable you <=21")
     if (YOU.scoreSpan > DEALER.scoreSpan) {
       resultMessage.innerHTML = "You Won";
-      winAudio.play();
       resultMessage.style.color = "green";
+      winAudio.play();
       winTable += 1;
       document.querySelector("#Wins-Table").innerHTML = winTable;
+      return;
     } else if (YOU.scoreSpan < DEALER.scoreSpan) {
       if (DEALER.scoreSpan <= 21) {
         resultMessage.innerHTML = "You Lost";
