@@ -110,11 +110,14 @@ function dealButton() {
 }
 
 async function standButton() {
+
   if (startGame === false && turnOver === false) {
     while (
       DEALER.scoreSpan < 17 ||
-      (YOU.scoreSpan >= 17 && DEALER.scoreSpan >= 17)
+      (YOU.scoreSpan >= 17 && DEALER.scoreSpan >= 17 && DEALER.scoreSpan <= 21)
     ) {
+      console.log("in while");
+
       let randomNumber = Math.floor(Math.random() * 13);
       let card = document.createElement("img");
       card.src = `./images/${cardArray[randomNumber]}.png`;
@@ -128,10 +131,12 @@ async function standButton() {
       updateScore(randomNumber, DEALER);
 
       if (YOU.scoreSpan < DEALER.scoreSpan || DEALER.scoreSpan > 21) {
+        console.log("in bewlows if");
         updateResultAndTable();
+        return;
       }
+      await sleep(1000);
     }
-    await sleep(1000);
   }
   stand = true;
 }
